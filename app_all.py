@@ -48,18 +48,6 @@ for interface, addresses in interfaces.items():
     stats = interface_stats.get(interface)
     status = "🟢 UP" if stats and stats.isup else "🔴 DOWN"
     
-    total_interfaces = len(interfaces)
-
-    active_interfaces = sum(
-        1 for stats in interface_stats.values() if stats.isup
-    )
-    inactive_interfaces = total_interfaces - active_interfaces
-    co1, col2, col3 = st.columns(3)
-
-    col1.metrical("Total Interfaces", total_interfaces)
-    col2.metrical("Active Interfaces", active_interfaces)
-    col3.metrical("Inactive Interfaces", total_interfaces)
-
 
     if interface == "lo":
         interface_type = "Loopback"
@@ -102,7 +90,18 @@ for interface, addresses in interfaces.items():
                 st.write("MAC Address:", address.address)
 
 
-        
+
+total_interfaces = len(interfaces)
+
+active_interfaces = sum(1 for stats in interface_stats.values() if stats.isup)
+inactive_interfaces = total_interfaces - active_interfaces
+
+col1, col2, col3 = st.columns(3)
+
+col1.metric("Total Interfaces", total_interfaces)
+col2.metric("Active Interfaces", active_interfaces)
+col3.metric("Inactive Interfaces", total_interfaces)
+    
 
 
 #DNS server
