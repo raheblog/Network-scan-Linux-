@@ -9,9 +9,10 @@ import psutil
 import socket
 import subprocess
 import ipaddress
-
+from datetime import datetime
 st.header("NEtwork scan")
-st.title("Network scan - Linux")
+st.title("Linux Network analyzer")
+st.caption(f"Last scan: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 st.write(f"This program is open-source and licensed under the **MIT**  License")
 
 
@@ -46,6 +47,19 @@ st.subheader("Network **Interfaces** ")
 for interface, addresses in interfaces.items():
     stats = interface_stats.get(interface)
     status = "🟢 UP" if stats and stats.isup else "🔴 DOWN"
+    
+    total_interfaces = len(interfaces)
+
+    active_interfaces = sum(
+        1 for stats in interface_stats.values() if stats.isup
+    )
+    inactive_interfaces = total_interfaces - active_interfaces
+    co1, col2, col3 = st.columns(3)
+
+    col1.metrical("Total Interfaces", total_interfaces)
+    col2.metrical("Active Interfaces", active_interfaces)
+    col3.metrical("Inactive Interfaces", total_interfaces)
+
 
     if interface == "lo":
         interface_type = "Loopback"
@@ -53,10 +67,10 @@ for interface, addresses in interfaces.items():
         interface_type = "Wi-Fi"
     elif interface.startswith(("en","eth")):
         interface_type = "Ethernet"
-    elif interface.startswith(("tun","tup")):
+    elif interface.startswith(("tun","tap")):
         interface_type = "VPN / Tunnel"
     else:
-        interface_type = "Unknow"
+        interface_type = "Unknown"
 
 
 
