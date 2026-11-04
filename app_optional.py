@@ -154,4 +154,39 @@ st.download_button(
     file_name = "Network_reqort.csv",
     mime = "Text / csv")
 
+
+
+# add Export "Text"
+
+text_data = []
+
+text_data.append("LINUX NETWORK ANALYZER REPORT")
+text_data.append(f"Scan Time: {datetime.now()}")
+text_data.append("=" * 40)
+
+
+for interface, addresses in interfaces.items():
+    stats = interface_stats.get(interface)
+    status = "UP" if stats and stats.isup else "DOWN"
+
+    text_data.append(f"\nInterface: {interface}")
+    text_data.append(f"status: {status}")
+
+    for address in addresses:
+        text_data.append(f"Address: {address.address}")
+        text_data.append(f"Netmask: {address.netmask}")
+        text_data.append(f"Broadcast: {address.broadcast}")
+
+txt_countent = "\n".join(text_data)
+
+st.download_button(
+    label="📄 Download TXT",
+    data=txt_countent,
+    file_name="Network_report.txt",
+    mime = "text / plain"
+)
+
+
+
+
 st.write("creat by 'raheb' :) ")
