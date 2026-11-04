@@ -54,13 +54,13 @@ The project focuses on making Linux network configuration easier to understand, 
 ### 1. Clone the repository
 
 ```bash
-git clone YOUR_REPOSITORY_URL
+git clone https://github.com/raheblog/Network-scan-Linux-.git
 ```
 
 ### 2. Enter the project directory
 
 ```bash
-cd linux-network-analyzer
+cd Network-scan-Linux-
 ```
 
 ### 3. Create a virtual environment
