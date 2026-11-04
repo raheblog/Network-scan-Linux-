@@ -139,7 +139,7 @@ AI was used as a supporting tool for learning, problem-solving, debugging, and c
 Linux Enthusiast | Python Developer | Technology Explorer
 
 - Website: https://raheblog.ir
-- GitHub: https://github.com/YOUR_USERNAME
+- GitHub: https://github.com/raheblog
 
 ---
 
